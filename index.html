@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcANE - Archaeology: Accessibility, Networking, Engagement</title>
+    <meta name="description" content="Open-access archaeology platform connecting professionals, students, and enthusiasts worldwide">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+            <div class="container">
+                <div class="nav__brand">
+                    <h1 class="nav__logo">ArcANE</h1>
+                </div>
+                
+                <button class="nav__toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="hamburger"></span>
+                </button>
+                
+                <div class="nav__menu">
+                    <ul class="nav__list">
+                        <li><a href="#home" class="nav__link active" data-translate="nav.home">Home</a></li>
+                        <li><a href="#blog" class="nav__link" data-translate="nav.blog">Blog</a></li>
+                        <li><a href="#resources" class="nav__link" data-translate="nav.resources">Resources</a></li>
+                        <li><a href="#about" class="nav__link" data-translate="nav.about">About</a></li>
+                        <li><a href="#community" class="nav__link" data-translate="nav.community">Community</a></li>
+                    </ul>
+                    
+                    <div class="nav__actions">
+                        <select class="language-switcher" aria-label="Select language">
+                            <option value="en">EN</option>
+                            <option value="es">ES</option>
+                            <option value="fr">FR</option>
+                            <option value="de">DE</option>
+                            <option value="ar">AR</option>
+                        </select>
+                        
+                        <button class="btn btn--secondary btn--sm" id="loginBtn" data-translate="nav.login">Login</button>
+                        <button class="btn btn--primary btn--sm" id="registerBtn" data-translate="nav.register">Register</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main" role="main">
+        <!-- Home Section -->
+        <section id="home" class="section section--hero">
+            <div class="container">
+                <div class="hero">
+                    <div class="hero__content">
+                        <h2 class="hero__title" data-translate="homepage.hero_title">ArcANE: Archaeology for Everyone</h2>
+                        <p class="hero__subtitle" data-translate="homepage.hero_subtitle">Accessibility, Networking, Engagement</p>
+                        <p class="hero__description" data-translate="homepage.hero_description">
+                            An open-access platform connecting archaeology professionals, students, and enthusiasts worldwide. 
+                            Discover resources, share knowledge, and build community.
+                        </p>
+                        <div class="hero__actions">
+                            <button class="btn btn--primary btn--lg" data-translate="homepage.join_community">Join Our Community</button>
+                            <a href="#blog" class="btn btn--outline btn--lg">Explore Blog</a>
+                        </div>
+                    </div>
+                    
+                    <div class="stats">
+                        <div class="stats__grid">
+                            <div class="stat">
+                                <div class="stat__number">2,847</div>
+                                <div class="stat__label">Users</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat__number">156</div>
+                                <div class="stat__label">Posts</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat__number">423</div>
+                                <div class="stat__label">Resources</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat__number">67</div>
+                                <div class="stat__label">Countries</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="featured">
+                    <div class="featured__posts">
+                        <h3 data-translate="homepage.featured_posts">Featured Posts</h3>
+                        <div class="featured__grid" id="featuredPosts">
+                            <!-- Featured posts will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="featured__resources">
+                        <h3 data-translate="homepage.featured_resources">Featured Resources</h3>
+                        <div class="featured__grid" id="featuredResources">
+                            <!-- Featured resources will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="section section--blog hidden">
+            <div class="container">
+                <header class="section__header">
+                    <h2 data-translate="blog.title">Blog</h2>
+                    <div class="blog__controls">
+                        <div class="blog__categories">
+                            <button class="btn btn--secondary active" data-category="all">All</button>
+                            <button class="btn btn--secondary" data-category="casual" data-translate="blog.casual">Casual</button>
+                            <button class="btn btn--secondary" data-category="academic" data-translate="blog.academic">Academic</button>
+                        </div>
+                        
+                        <div class="search-group">
+                            <input type="search" class="form-control" id="blogSearch" data-translate-placeholder="blog.search_placeholder" placeholder="Search posts...">
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="blog__sidebar">
+                    <div class="tag-filter">
+                        <h4 data-translate="blog.filter_by_tags">Filter by tags</h4>
+                        <div class="tag-list" id="tagFilter">
+                            <!-- Tags will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="blog__content">
+                    <div class="posts-grid" id="postsGrid">
+                        <!-- Blog posts will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="section section--resources hidden">
+            <div class="container">
+                <header class="section__header">
+                    <h2 data-translate="resources.title">Resource Pool</h2>
+                    <div class="resources__controls">
+                        <div class="sort-group">
+                            <label for="sortBy" data-translate="resources.sort_by">Sort by:</label>
+                            <select id="sortBy" class="form-control">
+                                <option value="alphabetical" data-translate="resources.alphabetical">Alphabetical</option>
+                                <option value="region" data-translate="resources.region">Region</option>
+                                <option value="studySection" data-translate="resources.study_section">Study Section</option>
+                                <option value="dateAdded">Date Added</option>
+                            </select>
+                        </div>
+                        
+                        <div class="search-group">
+                            <input type="search" class="form-control" id="resourceSearch" data-translate-placeholder="resources.search_placeholder" placeholder="Search resources...">
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="resources__sidebar">
+                    <div class="filter-group">
+                        <h4 data-translate="resources.filter_by_type">Filter by type</h4>
+                        <div class="filter-checkboxes" id="typeFilter">
+                            <!-- Type filters will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Filter by region</h4>
+                        <div class="filter-checkboxes" id="regionFilter">
+                            <!-- Region filters will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resources__content">
+                    <div class="resources-grid" id="resourcesGrid">
+                        <!-- Resources will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section section--about hidden">
+            <div class="container">
+                <div class="about__content">
+                    <h2>About ArcANE</h2>
+                    <div class="about__grid">
+                        <div class="about__mission">
+                            <h3>Our Mission</h3>
+                            <p>ArcANE (Archaeology: Accessibility, Networking, Engagement) is an open-access project developed by students of archaeology and ancient history for professionals, students, and hobbyists worldwide.</p>
+                            <p>We aim to create a community-driven resource pool that is easily accessible by any person across the globe, fostering collaboration and knowledge sharing in the field of archaeology.</p>
+                        </div>
+                        
+                        <div class="about__values">
+                            <h3>Our Values</h3>
+                            <ul>
+                                <li><strong>Accessibility:</strong> Making archaeological knowledge available to everyone</li>
+                                <li><strong>Networking:</strong> Connecting professionals, students, and enthusiasts</li>
+                                <li><strong>Engagement:</strong> Fostering active participation in archaeological discourse</li>
+                                <li><strong>Open Access:</strong> Removing barriers to archaeological information</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="about__team">
+                            <h3>Our Team</h3>
+                            <p>ArcANE is developed and maintained by a dedicated team of archaeology and ancient history students from universities around the world. Our diverse backgrounds bring different perspectives and expertise to the platform.</p>
+                        </div>
+                        
+                        <div class="about__contribute">
+                            <h3>Get Involved</h3>
+                            <p>Join our community of contributors! Whether you're a seasoned archaeologist, a student, or an enthusiast, there are many ways to contribute to ArcANE.</p>
+                            <button class="btn btn--primary">Become a Contributor</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section id="community" class="section section--community hidden">
+            <div class="container">
+                <h2>Community</h2>
+                <div class="community__content">
+                    <div class="community__info">
+                        <h3>Join Our Growing Community</h3>
+                        <p>Connect with archaeologists, researchers, and enthusiasts from around the world. Share your discoveries, ask questions, and collaborate on projects.</p>
+                        
+                        <div class="community__features">
+                            <div class="feature">
+                                <h4>Discussion Forums</h4>
+                                <p>Engage in academic discussions and casual conversations about archaeology</p>
+                            </div>
+                            <div class="feature">
+                                <h4>Collaboration Tools</h4>
+                                <p>Work together on research projects and fieldwork opportunities</p>
+                            </div>
+                            <div class="feature">
+                                <h4>Mentorship Program</h4>
+                                <p>Connect experienced professionals with students and newcomers</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-section">
+                        <div class="auth-tabs">
+                            <button class="auth-tab active" data-tab="login">Login</button>
+                            <button class="auth-tab" data-tab="register">Register</button>
+                        </div>
+                        
+                        <form class="auth-form" id="loginForm">
+                            <div class="form-group">
+                                <label for="loginEmail" class="form-label">Email</label>
+                                <input type="email" id="loginEmail" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPassword" class="form-label">Password</label>
+                                <input type="password" id="loginPassword" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--full-width">Login</button>
+                        </form>
+                        
+                        <form class="auth-form hidden" id="registerForm">
+                            <div class="form-group">
+                                <label for="registerName" class="form-label">Full Name</label>
+                                <input type="text" id="registerName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="registerEmail" class="form-label">Email</label>
+                                <input type="email" id="registerEmail" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="registerPassword" class="form-label">Password</label>
+                                <input type="password" id="registerPassword" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="registerRole" class="form-label">Role</label>
+                                <select id="registerRole" class="form-control" required>
+                                    <option value="">Select your role</option>
+                                    <option value="student">Student</option>
+                                    <option value="professional">Professional Archaeologist</option>
+                                    <option value="hobbyist">Hobbyist/Enthusiast</option>
+                                    <option value="researcher">Researcher</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--full-width">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h4>ArcANE</h4>
+                    <p>Archaeology: Accessibility, Networking, Engagement</p>
+                    <p>An open-access platform for the global archaeology community.</p>
+                </div>
+                
+                <div class="footer__section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__section">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="#community">Join Us</a></li>
+                        <li><a href="#">Guidelines</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" target="_blank" aria-label="Twitter">Twitter</a>
+                        <a href="#" target="_blank" aria-label="Facebook">Facebook</a>
+                        <a href="#" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+                        <a href="#" target="_blank" aria-label="Academia.edu">Academia</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p>&copy; 2024 ArcANE Project. Licensed under CC BY-SA 4.0</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal hidden" id="postModal" role="dialog" aria-labelledby="postModalTitle" aria-hidden="true">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content">
+            <header class="modal__header">
+                <h3 id="postModalTitle"></h3>
+                <button class="modal__close" aria-label="Close modal">&times;</button>
+            </header>
+            <div class="modal__body" id="postModalBody">
+                <!-- Post content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
