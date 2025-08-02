@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading content...</p>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header" role="banner">
         <nav class="nav" role="navigation" aria-label="Main navigation">
@@ -26,7 +34,6 @@
                         <li><a href="#blog" class="nav__link" data-translate="nav.blog">Blog</a></li>
                         <li><a href="#resources" class="nav__link" data-translate="nav.resources">Resources</a></li>
                         <li><a href="#about" class="nav__link" data-translate="nav.about">About</a></li>
-                        <li><a href="#community" class="nav__link" data-translate="nav.community">Community</a></li>
                     </ul>
                     
                     <div class="nav__actions">
@@ -37,9 +44,6 @@
                             <option value="de">DE</option>
                             <option value="ar">AR</option>
                         </select>
-                        
-                        <button class="btn btn--secondary btn--sm" id="loginBtn" data-translate="nav.login">Login</button>
-                        <button class="btn btn--primary btn--sm" id="registerBtn" data-translate="nav.register">Register</button>
                     </div>
                 </div>
             </div>
@@ -53,34 +57,33 @@
             <div class="container">
                 <div class="hero">
                     <div class="hero__content">
-                        <h2 class="hero__title" data-translate="homepage.hero_title">ArcANE: Archaeology for Everyone</h2>
-                        <p class="hero__subtitle" data-translate="homepage.hero_subtitle">Accessibility, Networking, Engagement</p>
-                        <p class="hero__description" data-translate="homepage.hero_description">
+                        <h2 class="hero__title" data-translate="homepage.hero.title">ArcANE: Archaeology for Everyone</h2>
+                        <p class="hero__subtitle" data-translate="homepage.hero.subtitle">Accessibility, Networking, Engagement</p>
+                        <p class="hero__description" data-translate="homepage.hero.description">
                             An open-access platform connecting archaeology professionals, students, and enthusiasts worldwide. 
                             Discover resources, share knowledge, and build community.
                         </p>
                         <div class="hero__actions">
-                            <button class="btn btn--primary btn--lg" data-translate="homepage.join_community">Join Our Community</button>
-                            <a href="#blog" class="btn btn--outline btn--lg">Explore Blog</a>
+                            <a href="#blog" class="btn btn--primary btn--lg" data-translate="homepage.hero.cta">Explore Content</a>
                         </div>
                     </div>
                     
                     <div class="stats">
-                        <div class="stats__grid">
+                        <div class="stats__grid" id="communityStats">
                             <div class="stat">
-                                <div class="stat__number">2,847</div>
+                                <div class="stat__number" id="userCount">2,847</div>
                                 <div class="stat__label">Users</div>
                             </div>
                             <div class="stat">
-                                <div class="stat__number">156</div>
+                                <div class="stat__number" id="postCount">156</div>
                                 <div class="stat__label">Posts</div>
                             </div>
                             <div class="stat">
-                                <div class="stat__number">423</div>
+                                <div class="stat__number" id="resourceCount">423</div>
                                 <div class="stat__label">Resources</div>
                             </div>
                             <div class="stat">
-                                <div class="stat__number">67</div>
+                                <div class="stat__number" id="countryCount">67</div>
                                 <div class="stat__label">Countries</div>
                             </div>
                         </div>
@@ -89,18 +92,29 @@
                 
                 <div class="featured">
                     <div class="featured__posts">
-                        <h3 data-translate="homepage.featured_posts">Featured Posts</h3>
+                        <h3 data-translate="homepage.sections.featured_posts">Featured Posts</h3>
                         <div class="featured__grid" id="featuredPosts">
                             <!-- Featured posts will be populated by JavaScript -->
                         </div>
                     </div>
                     
                     <div class="featured__resources">
-                        <h3 data-translate="homepage.featured_resources">Featured Resources</h3>
+                        <h3 data-translate="homepage.sections.featured_resources">Featured Resources</h3>
                         <div class="featured__grid" id="featuredResources">
                             <!-- Featured resources will be populated by JavaScript -->
                         </div>
                     </div>
+                </div>
+
+                <!-- Newsletter Signup -->
+                <div class="newsletter-section">
+                    <h3 data-translate="homepage.sections.newsletter">Stay Updated</h3>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Enter your email address" required>
+                            <button type="submit" class="btn btn--primary">Subscribe</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
@@ -112,9 +126,9 @@
                     <h2 data-translate="blog.title">Blog</h2>
                     <div class="blog__controls">
                         <div class="blog__categories">
-                            <button class="btn btn--secondary active" data-category="all">All</button>
-                            <button class="btn btn--secondary" data-category="casual" data-translate="blog.casual">Casual</button>
-                            <button class="btn btn--secondary" data-category="academic" data-translate="blog.academic">Academic</button>
+                            <button class="btn btn--secondary active" data-category="all" data-translate="blog.categories.all">All Posts</button>
+                            <button class="btn btn--secondary" data-category="casual" data-translate="blog.categories.casual">Casual</button>
+                            <button class="btn btn--secondary" data-category="academic" data-translate="blog.categories.academic">Academic</button>
                         </div>
                         
                         <div class="search-group">
@@ -123,18 +137,24 @@
                     </div>
                 </header>
                 
-                <div class="blog__sidebar">
-                    <div class="tag-filter">
-                        <h4 data-translate="blog.filter_by_tags">Filter by tags</h4>
-                        <div class="tag-list" id="tagFilter">
-                            <!-- Tags will be populated by JavaScript -->
+                <div class="blog__content">
+                    <div class="blog__sidebar">
+                        <div class="tag-filter">
+                            <h4 data-translate="blog.filter_by_tags">Filter by tags</h4>
+                            <div class="tag-list" id="tagFilter">
+                                <!-- Tags will be populated by JavaScript -->
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="blog__content">
-                    <div class="posts-grid" id="postsGrid">
-                        <!-- Blog posts will be populated by JavaScript -->
+                    
+                    <div class="blog__main">
+                        <div class="posts-grid" id="postsGrid">
+                            <!-- Blog posts will be populated by JavaScript -->
+                        </div>
+                        
+                        <div class="load-more-container">
+                            <button class="btn btn--outline" id="loadMorePosts">Load More Posts</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -149,10 +169,9 @@
                         <div class="sort-group">
                             <label for="sortBy" data-translate="resources.sort_by">Sort by:</label>
                             <select id="sortBy" class="form-control">
-                                <option value="alphabetical" data-translate="resources.alphabetical">Alphabetical</option>
-                                <option value="region" data-translate="resources.region">Region</option>
-                                <option value="studySection" data-translate="resources.study_section">Study Section</option>
-                                <option value="dateAdded">Date Added</option>
+                                <option value="alphabetical" data-translate="resources.sort_options.alphabetical">Alphabetical</option>
+                                <option value="date" data-translate="resources.sort_options.date">Date Added</option>
+                                <option value="type" data-translate="resources.sort_options.type">Type</option>
                             </select>
                         </div>
                         
@@ -162,25 +181,40 @@
                     </div>
                 </header>
                 
-                <div class="resources__sidebar">
-                    <div class="filter-group">
-                        <h4 data-translate="resources.filter_by_type">Filter by type</h4>
-                        <div class="filter-checkboxes" id="typeFilter">
-                            <!-- Type filters will be populated by JavaScript -->
+                <div class="resources__content">
+                    <div class="resources__sidebar">
+                        <div class="filter-group">
+                            <h4 data-translate="resources.filters.all_types">Filter by type</h4>
+                            <div class="filter-checkboxes" id="typeFilter">
+                                <!-- Type filters will be populated by JavaScript -->
+                            </div>
                         </div>
+                        
+                        <div class="filter-group">
+                            <h4 data-translate="resources.filters.all_regions">Filter by region</h4>
+                            <div class="filter-checkboxes" id="regionFilter">
+                                <!-- Region filters will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <h4 data-translate="resources.filters.all_sections">Filter by study section</h4>
+                            <div class="filter-checkboxes" id="studySectionFilter">
+                                <!-- Study section filters will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn--outline btn--sm" id="clearFilters" data-translate="common.clear_filters">Clear Filters</button>
                     </div>
                     
-                    <div class="filter-group">
-                        <h4>Filter by region</h4>
-                        <div class="filter-checkboxes" id="regionFilter">
-                            <!-- Region filters will be populated by JavaScript -->
+                    <div class="resources__main">
+                        <div class="resources-grid" id="resourcesGrid">
+                            <!-- Resources will be populated by JavaScript -->
                         </div>
-                    </div>
-                </div>
-                
-                <div class="resources__content">
-                    <div class="resources-grid" id="resourcesGrid">
-                        <!-- Resources will be populated by JavaScript -->
+                        
+                        <div class="load-more-container">
+                            <button class="btn btn--outline" id="loadMoreResources">Load More Resources</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -222,79 +256,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Community Section -->
-        <section id="community" class="section section--community hidden">
-            <div class="container">
-                <h2>Community</h2>
-                <div class="community__content">
-                    <div class="community__info">
-                        <h3>Join Our Growing Community</h3>
-                        <p>Connect with archaeologists, researchers, and enthusiasts from around the world. Share your discoveries, ask questions, and collaborate on projects.</p>
-                        
-                        <div class="community__features">
-                            <div class="feature">
-                                <h4>Discussion Forums</h4>
-                                <p>Engage in academic discussions and casual conversations about archaeology</p>
-                            </div>
-                            <div class="feature">
-                                <h4>Collaboration Tools</h4>
-                                <p>Work together on research projects and fieldwork opportunities</p>
-                            </div>
-                            <div class="feature">
-                                <h4>Mentorship Program</h4>
-                                <p>Connect experienced professionals with students and newcomers</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="auth-section">
-                        <div class="auth-tabs">
-                            <button class="auth-tab active" data-tab="login">Login</button>
-                            <button class="auth-tab" data-tab="register">Register</button>
-                        </div>
-                        
-                        <form class="auth-form" id="loginForm">
-                            <div class="form-group">
-                                <label for="loginEmail" class="form-label">Email</label>
-                                <input type="email" id="loginEmail" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="loginPassword" class="form-label">Password</label>
-                                <input type="password" id="loginPassword" class="form-control" required>
-                            </div>
-                            <button type="submit" class="btn btn--primary btn--full-width">Login</button>
-                        </form>
-                        
-                        <form class="auth-form hidden" id="registerForm">
-                            <div class="form-group">
-                                <label for="registerName" class="form-label">Full Name</label>
-                                <input type="text" id="registerName" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="registerEmail" class="form-label">Email</label>
-                                <input type="email" id="registerEmail" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="registerPassword" class="form-label">Password</label>
-                                <input type="password" id="registerPassword" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="registerRole" class="form-label">Role</label>
-                                <select id="registerRole" class="form-control" required>
-                                    <option value="">Select your role</option>
-                                    <option value="student">Student</option>
-                                    <option value="professional">Professional Archaeologist</option>
-                                    <option value="hobbyist">Hobbyist/Enthusiast</option>
-                                    <option value="researcher">Researcher</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn--primary btn--full-width">Register</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Footer -->
@@ -320,10 +281,10 @@
                 <div class="footer__section">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="#community">Join Us</a></li>
-                        <li><a href="#">Guidelines</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Support</a></li>
+                        <li><a href="mailto:contact@arcane-project.org">Contact</a></li>
+                        <li><a href="#" target="_blank">Guidelines</a></li>
+                        <li><a href="#" target="_blank">Support</a></li>
+                        <li><a href="#" target="_blank">Contribute</a></li>
                     </ul>
                 </div>
                 
@@ -344,7 +305,7 @@
         </div>
     </footer>
 
-    <!-- Modals -->
+    <!-- Post Modal -->
     <div class="modal hidden" id="postModal" role="dialog" aria-labelledby="postModalTitle" aria-hidden="true">
         <div class="modal__backdrop"></div>
         <div class="modal__content">
@@ -355,6 +316,14 @@
             <div class="modal__body" id="postModalBody">
                 <!-- Post content will be loaded here -->
             </div>
+        </div>
+    </div>
+
+    <!-- Error Messages -->
+    <div class="toast hidden" id="errorToast">
+        <div class="toast__content">
+            <span class="toast__message" data-translate="common.error">Something went wrong</span>
+            <button class="toast__close">&times;</button>
         </div>
     </div>
 
